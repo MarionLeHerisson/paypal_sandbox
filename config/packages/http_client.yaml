@@ -1,0 +1,22 @@
+framework:
+    http_client:
+        scoped_clients:
+            # Get access token
+            http_client.paypal.auth:
+                scope: '%env(PAYPAL_API_REGEXP)%/v1/oauth2/token'
+                auth_basic: '%env(PAYPAL_CLIENT_ID)%:%env(PAYPAL_SECRET)%'
+                headers:
+                    Content-Type: 'application/x-www-form-urlencoded'
+
+            # Get Order details
+            http_client.paypal.order:
+                scope: '%env(PAYPAL_API_REGEXP)%/v2/checkout/orders/[0-9A-Z]{17}'
+                headers:
+                    Content-Type: 'application/json'
+
+            # Capture payment
+            http_client.paypal.payment:
+                scope: '%env(PAYPAL_API_REGEXP)%/v2/checkout/orders/[0-9A-Z]{17}/capture'
+                headers:
+                    Content-Type: 'application/json'
+                    Prefer: 'return=representation' # To get a complete representation of payment

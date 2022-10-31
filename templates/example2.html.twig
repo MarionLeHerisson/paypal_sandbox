@@ -1,0 +1,36 @@
+<div id="paypal-button-container"></div>
+
+<script src="https://www.paypal.com/sdk/js?{{ parameters }}"></script>
+<script>
+    paypal.Buttons({
+        // All your options here !
+        createOrder: (data, actions) => {
+            return actions.order.create({
+                intent: 'capture',  // capture or authorize
+                purchase_units: [{
+                    amount: {
+                        value: 50.25
+                    },
+                    description: 'Magical unicorn',
+                    invoice_id: '1234567890',
+                    soft_descriptor: 'unicorn-2345678'
+                }],
+                application_context: {
+                    brand_name: 'My amazing brand',
+                    shipping_preference: 'NO_SHIPPING' // if you handle shipping
+                }
+            });
+        },
+        // Finalizes the transaction after payer approval
+        onApprove: (data) => {
+            console.log('Unicorn bought, yay !')
+        },
+        // The user closed the window
+        onCancel: () => {
+            console.log('The user canceled the payment');
+        },
+        onError: (err) => {
+            console.log('Something went wrong', err);
+        }
+    }).render('#paypal-button-container');
+</script>
