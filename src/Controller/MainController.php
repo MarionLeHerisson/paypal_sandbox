@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Payment\PayPal;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -43,8 +44,11 @@ class MainController extends AbstractController
     /**
      * @Route("/confirmation", name="confirmation")
      */
-    public function confirmation(): Response
+    public function confirmation(Request $request, PayPal $payPal): Response
     {
+        // Some logic to verify if the captured payment is valid
+        // ... 
+
         return $this->render('messages/confirmation.html.twig');
     }
 }

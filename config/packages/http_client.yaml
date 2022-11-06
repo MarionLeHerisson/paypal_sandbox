@@ -3,6 +3,7 @@ framework:
         scoped_clients:
             # Get access token
             http_client.paypal.auth:
+                #note that this is a regexp
                 scope: '%env(PAYPAL_API_REGEXP)%/v1/oauth2/token'
                 auth_basic: '%env(PAYPAL_CLIENT_ID)%:%env(PAYPAL_SECRET)%'
                 headers:
