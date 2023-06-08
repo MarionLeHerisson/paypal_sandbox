@@ -2,6 +2,7 @@
 
 ## Installation
 
+`symfony composer install`
 `symfony server:start`
 
 ## Examples
